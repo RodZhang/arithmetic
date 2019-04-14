@@ -16,8 +16,8 @@ public class LongestPalindrome {
 
         String newStr = fillStr(s);
 
-        int resultId = 0;
-        int resultLen = 0;
+        int maxId = 0;
+        int maxLen = 0;
 
         int newSize = newStr.length();
         int[] p = new int[newSize];
@@ -36,16 +36,16 @@ public class LongestPalindrome {
                 id = i;
             }
 
-            if (resultLen < p[i]) {
-                resultLen = p[i];
-                resultId = i;
+            if (maxLen < p[i]) {
+                maxLen = p[i];
+                maxId = i;
             }
             System.out.println(String.format("id=%d, maxRight=%d", id, maxRight));
         }
 
-        int start = (resultId - resultLen + 1) / 2;
-        int end = start + resultLen - 1;
-        System.out.println(String.format("resultId=%d, resultLen=%d, p=%s, start=%d, end=%d", resultId, resultLen,
+        int start = (maxId - maxLen + 1) / 2;
+        int end = start + maxLen - 1;
+        System.out.println(String.format("maxId=%d, maxLen=%d, p=%s, start=%d, end=%d", maxId, maxLen,
                 printArr(p), start, end));
         return s.substring(start, end);
     }
