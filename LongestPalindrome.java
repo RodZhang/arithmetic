@@ -25,25 +25,28 @@ public class LongestPalindrome {
         int maxRight = 0;
 
         for (int i = 0; i < newSize; i++) {
-            p[i] = i < maxRight ? Math.min(p[i - 2*id], maxRight - i) : 1;
+            p[i] = i < maxRight ? Math.min(p[2 * id - i], maxRight - i) : 1;
 
-            while(i - p[i] >= 0 && i + p[i] < newSize && newStr.charAt(i + p[i]) == newStr.charAt(i - p[i])) {
+            while (i - p[i] >= 0 && i + p[i] < newSize && newStr.charAt(i + p[i]) == newStr.charAt(i - p[i])) {
                 p[i]++;
             }
 
             if (maxRight < p[i] + i) {
                 maxRight = p[i] + i;
+                id = i;
             }
 
             if (resultLen < p[i]) {
                 resultLen = p[i];
                 resultId = i;
             }
+            System.out.println(String.format("id=%d, maxRight=%d", id, maxRight));
         }
 
         int start = (resultId - resultLen + 1) / 2;
         int end = start + resultLen - 1;
-        System.out.println(String.format("resultId=%d, resultLen=%d, p=%s, start=%d, end=%d", resultId, resultLen, printArr(p), start, end));
+        System.out.println(String.format("resultId=%d, resultLen=%d, p=%s, start=%d, end=%d", resultId, resultLen,
+                printArr(p), start, end));
         return s.substring(start, end);
     }
 
